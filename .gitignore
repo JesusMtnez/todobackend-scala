@@ -1,0 +1,22 @@
+.direnv/
+result
+
+# sbt
+target/
+project/plugins/project/
+boot/
+lib_managed/
+src_managed/
+
+# metals
+.metals/
+.bsp/
+.bloop/
+metals.sbt
+.vscode
+
+# node / yarn
+node_modules/
+
+# mkdocs
+site/
