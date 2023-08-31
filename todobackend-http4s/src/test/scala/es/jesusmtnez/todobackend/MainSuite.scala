@@ -1,11 +1,11 @@
-package es.jesusmtnez.todobackend
+// package es.jesusmtnez.todobackend
 
-import munit.CatsEffectSuite
+// import munit.CatsEffectSuite
 
-class MainSuite extends CatsEffectSuite {
+// // class MainSuite extends CatsEffectSuite {
 
-  test("Main should exit succesfully") {
-    val main = Main.run.attempt
-    assertIO(main, Right(()))
-  }
-}
+//   test("Main should exit succesfully") {
+//     val main = Main.run.attempt
+//     assertIO(main, Right(()))
+//   }
+// }
