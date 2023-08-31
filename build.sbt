@@ -31,11 +31,24 @@ lazy val `todobackend-http4s` = project
   )
   .enablePlugins(BuildInfoPlugin)
 
+val zioHttpV = "3.0.0-RC2"
+
+lazy val `todobackend-zio-http` = project
+  .in(file("todobackend-zio-http"))
+  .settings(
+    name := "todobackend-zio-http",
+    libraryDependencies ++= Seq(
+      "dev.zio" %% "zio-http" % zioHttpV
+    )
+  )
+  .enablePlugins(BuildInfoPlugin)
+
 lazy val root = project
   .in(file("."))
   .settings(publish / skip := true)
   .aggregate(
-    `todobackend-http4s`
+    `todobackend-http4s`,
+    `todobackend-zio-http`
   )
 
 addCommandAlias("fmt", "all scalafmtSbt scalafmt Test/scalafmt")
