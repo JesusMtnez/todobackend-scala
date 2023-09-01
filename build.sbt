@@ -36,6 +36,7 @@ lazy val `todobackend-http4s` = project
       "org.typelevel" %% "munit-cats-effect-3" % munitCE3V % Test
     )
   )
+  .dependsOn(common)
   .enablePlugins(BuildInfoPlugin)
 
 val zioHttpV = "3.0.0-RC2"
