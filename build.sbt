@@ -6,6 +6,17 @@ ThisBuild / startYear := Some(2023)
 ThisBuild / licenses := Seq(License.MIT)
 ThisBuild / scalaVersion := scalaV
 
+val circeV = "0.14.6"
+
+lazy val common = project
+  .in(file("common"))
+  .settings(
+    name := "todobackend-common",
+    libraryDependencies ++= Seq(
+      "io.circe" %% "circe-generic" % circeV
+    )
+  )
+
 val http4sV = "1.0.0-M40"
 val logbackV = "1.2.6"
 val munitV = "0.7.29"
@@ -43,6 +54,7 @@ lazy val root = project
   .in(file("."))
   .settings(publish / skip := true)
   .aggregate(
+    common,
     `todobackend-http4s`,
     `todobackend-zio-http`
   )
