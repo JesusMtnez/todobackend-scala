@@ -20,7 +20,7 @@ lazy val common = project
 val http4sV = "1.0.0-M40"
 val logbackV = "1.2.6"
 val munitV = "0.7.29"
-val munitCE3V = "1.0.7"
+val munitCE3V = "2.0.0-M3"
 
 lazy val `todobackend-http4s` = project
   .in(file("todobackend-http4s"))
@@ -33,7 +33,7 @@ lazy val `todobackend-http4s` = project
       "org.http4s" %% "http4s-circe" % http4sV,
       "ch.qos.logback" % "logback-classic" % logbackV,
       "org.scalameta" %% "munit" % munitV % Test,
-      "org.typelevel" %% "munit-cats-effect-3" % munitCE3V % Test
+      "org.typelevel" %% "munit-cats-effect" % munitCE3V % Test
     )
   )
   .dependsOn(common)
