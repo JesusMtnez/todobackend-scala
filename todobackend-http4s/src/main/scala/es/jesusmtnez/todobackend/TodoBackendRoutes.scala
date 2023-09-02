@@ -29,3 +29,10 @@ object TodoBackendRoutes:
           items <- repository.getAll()
           response <- Ok(items)
         } yield response
+
+      case req @ POST -> Root =>
+        for {
+          item <- req.as[TodoRequest]
+          createdItem <- repository.create(item.title)
+          response <- Ok(createdItem)
+        } yield response
