@@ -36,3 +36,9 @@ object TodoBackendRoutes:
           createdItem <- repository.create(item.title)
           response <- Ok(createdItem)
         } yield response
+
+      case DELETE -> Root =>
+        for {
+          _ <- repository.deleteAll()
+          response <- Ok()
+        } yield response
