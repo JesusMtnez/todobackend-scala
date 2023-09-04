@@ -46,7 +46,12 @@ object TodoBackendRoutes:
       case req @ PATCH -> Root / UUIDVar(id) =>
         for {
           update <- req.as[TodoUpdate]
-          updatedItem <- repository.update(id, update.title, update.completed, update.order)
+          updatedItem <- repository.update(
+            id,
+            update.title,
+            update.completed,
+            update.order
+          )
           response <- Ok(updatedItem)
         } yield response
 
