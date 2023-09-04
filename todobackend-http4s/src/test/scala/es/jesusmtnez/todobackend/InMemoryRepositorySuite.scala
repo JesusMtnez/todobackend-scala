@@ -15,13 +15,14 @@ class InMemoryRepositorySuite extends CatsEffectSuite {
     } yield assert(result.isEmpty)
 
   test("getAll should return a value when there is 1 item"):
-    val expected = TodoItem.uncompleted("my title")
-
     for {
       repo <- repository
-      _ <- repo.create("my title")
+      created <- repo.create("my title")
       result <- repo.getAll()
-    } yield assertEquals(result, List(expected))
+    } yield assertEquals(
+      result,
+      created.toList
+    )
 
   test("create adds a new item"):
     for {
