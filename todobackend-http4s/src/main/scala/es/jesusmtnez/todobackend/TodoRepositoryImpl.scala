@@ -33,6 +33,26 @@ object TodoRepositoryImpl {
 
     override def getAll(): F[List[TodoItem]] =
       store.get.map(_.values.toList)
+
+    override def update(
+        id: UUID,
+        title: Option[String],
+        completed: Option[Boolean],
+        order: Option[Int]
+    ): F[Option[TodoItem]] =
+      store
+        .updateAndGet { items =>
+          items
+            .get(id)
+            .map { todo =>
+              val newTitle = title.getOrElse(todo.title)
+              val newCompleted = completed.getOrElse(todo.completed)
+              // val newOrder = order.getOrElse(0)
+              todo.copy(title = newTitle, completed = newCompleted)
+            }
+            .fold(items)(item => items.removed(id) + (id -> item))
+        }
+        .map(_.get(id))
   }
 
   def inMemory[F[_]: Sync](): F[TodoRepository[F]] =

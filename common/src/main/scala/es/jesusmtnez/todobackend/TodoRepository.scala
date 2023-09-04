@@ -10,4 +10,10 @@ trait TodoRepository[F[_]] {
   def deleteAll(): F[Unit]
   def getAll(): F[List[TodoItem]]
   def getById(id: UUID): F[Option[TodoItem]]
+  def update(
+      id: UUID,
+      title: Option[String],
+      completed: Option[Boolean],
+      order: Option[Int]
+  ): F[Option[TodoItem]]
 }

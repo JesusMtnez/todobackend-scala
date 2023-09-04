@@ -1,11 +1,11 @@
 package es.jesusmtnez.todobackend.domain
 
-import io.circe.Codec
-import io.circe.generic.semiauto.deriveCodec
+import io.circe.Decoder
+import io.circe.generic.semiauto.deriveDecoder
 
 final case class TodoRequest(
     title: String
 )
 
 object TodoRequest:
-  given Codec[TodoRequest] = deriveCodec
+  given Decoder[TodoRequest] = deriveDecoder
