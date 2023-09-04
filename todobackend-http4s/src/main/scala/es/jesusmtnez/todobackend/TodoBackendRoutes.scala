@@ -30,6 +30,12 @@ object TodoBackendRoutes:
           response <- Ok(items)
         } yield response
 
+      case GET -> Root / UUIDVar(id) =>
+        for {
+          item <- repository.getById(id)
+          response <- Ok(item)
+        } yield response
+
       case req @ POST -> Root =>
         for {
           item <- req.as[TodoRequest]
