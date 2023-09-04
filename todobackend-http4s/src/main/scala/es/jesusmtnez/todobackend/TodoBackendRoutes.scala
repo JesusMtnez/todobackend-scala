@@ -53,5 +53,11 @@ object TodoBackendRoutes:
       case DELETE -> Root =>
         for {
           _ <- repository.deleteAll()
-          response <- Ok()
+          response <- NoContent()
+        } yield response
+
+      case DELETE -> Root / UUIDVar(id) =>
+        for {
+          _ <- repository.delete(id)
+          response <- NoContent()
         } yield response
