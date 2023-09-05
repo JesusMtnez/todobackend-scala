@@ -49,6 +49,7 @@ lazy val `todobackend-zio-http` = project
       "dev.zio" %% "zio-http" % zioHttpV
     )
   )
+  .dependsOn(common)
   .enablePlugins(BuildInfoPlugin)
 
 lazy val root = project
