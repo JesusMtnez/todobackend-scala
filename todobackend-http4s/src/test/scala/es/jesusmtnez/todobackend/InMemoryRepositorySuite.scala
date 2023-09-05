@@ -17,7 +17,7 @@ class InMemoryRepositorySuite extends CatsEffectSuite {
   test("getAll should return a value when there is 1 item"):
     for {
       repo <- repository
-      created <- repo.create("my title")
+      created <- repo.create("my title", None)
       result <- repo.getAll()
     } yield assertEquals(
       result,
@@ -28,8 +28,8 @@ class InMemoryRepositorySuite extends CatsEffectSuite {
     for {
       repo <- repository
       _ <- repo.deleteAll()
-      _ <- repo.create("title")
-      _ <- repo.create("title 2")
+      _ <- repo.create("title", None)
+      _ <- repo.create("title 2", None)
       result <- repo.getAll()
     } yield assertEquals(result.length, 2)
 
