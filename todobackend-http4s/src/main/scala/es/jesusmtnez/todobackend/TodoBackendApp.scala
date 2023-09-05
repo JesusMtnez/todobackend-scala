@@ -12,7 +12,7 @@ import org.http4s.Method
 import org.typelevel.ci.CIString
 
 object TodoBackendApp extends IOApp.Simple:
-  val run = startServer[IO]
+  override val run = startServer[IO]
 
   def startServer[F[_]: Async: Network]: F[Unit] =
     implicit val loggerFactory: LoggerFactory[F] = Slf4jFactory.create[F]
