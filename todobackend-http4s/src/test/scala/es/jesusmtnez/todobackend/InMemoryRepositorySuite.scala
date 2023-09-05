@@ -6,7 +6,7 @@ import es.jesusmtnez.todobackend.domain.TodoItem
 
 class InMemoryRepositorySuite extends CatsEffectSuite {
 
-  val repository = TodoRepositoryImpl.inMemory[IO]()
+  val repository = TodoRepository.inMemory[IO]()
 
   test("getAll should return empty when there are no items"):
     for {

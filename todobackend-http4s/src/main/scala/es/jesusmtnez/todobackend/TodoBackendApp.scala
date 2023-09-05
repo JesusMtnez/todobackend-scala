@@ -11,9 +11,10 @@ import org.typelevel.log4cats.slf4j.Slf4jFactory
 import org.http4s.Method
 import org.typelevel.ci.CIString
 
-object TodoBackendServer {
+object TodoBackendApp extends IOApp.Simple:
+  val run = startServer[IO]
 
-  def run[F[_]: Async: Network]: F[Unit] =
+  def startServer[F[_]: Async: Network]: F[Unit] =
     implicit val loggerFactory: LoggerFactory[F] = Slf4jFactory.create[F]
 
     val cors =
@@ -28,14 +29,11 @@ object TodoBackendServer {
           )
         )
         .withAllowHeadersIn(Set(CIString("content-type")))
-
     for {
-      repository <- TodoRepositoryImpl.inMemory[F]()
+      repository <- TodoRepository.inMemory[F]()
       routes = TodoBackendRoutes.about[F]()
         <+> TodoBackendRoutes.todo[F](repository)
 
       httpApp <- cors(Logger.httpApp(true, true)(routes.orNotFound))
       _ <- EmberServerBuilder.default[F].withHttpApp(httpApp).build.useForever
     } yield ()
-
-}

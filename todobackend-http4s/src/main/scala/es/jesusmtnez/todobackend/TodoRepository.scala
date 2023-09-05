@@ -7,10 +7,30 @@ import es.jesusmtnez.todobackend.domain.TodoItem
 
 import java.util.UUID
 
-object TodoRepositoryImpl {
+trait TodoRepository[F[_]] {
+  def create(title: String, order: Option[Int]): F[Option[TodoItem]]
+  def delete(id: UUID): F[Unit]
+  def deleteAll(): F[Unit]
+  def getAll(): F[List[TodoItem]]
+  def getById(id: UUID): F[Option[TodoItem]]
+  def update(
+      id: UUID,
+      title: Option[String],
+      completed: Option[Boolean],
+      order: Option[Int]
+  ): F[Option[TodoItem]]
+}
+
+object TodoRepository:
+
+  def inMemory[F[_]: Sync](): F[TodoRepository[F]] =
+    Ref[F]
+      .of(Map.empty[UUID, TodoItem])
+      .map(new InMemory[F](_))
+
   private final case class InMemory[F[_]: Sync](
       private val store: Ref[F, Map[UUID, TodoItem]]
-  ) extends TodoRepository[F] {
+  ) extends TodoRepository[F]:
 
     override def create(
         title: String,
@@ -62,12 +82,3 @@ object TodoRepositoryImpl {
             .fold(items)(item => items.removed(id) + (id -> item))
         }
         .map(_.get(id))
-  }
-
-  def inMemory[F[_]: Sync](): F[TodoRepository[F]] =
-    Ref[F]
-      .of(Map.empty[UUID, TodoItem])
-      .map(
-        new InMemory[F](_)
-      )
-}
