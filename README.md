@@ -2,7 +2,7 @@
 
 A series of implemetations of [Todo-Backend][todo-backend] REST API in **Scala** using different libraries.
 
-- [ ] Using `http4s` with `cats-effect`
+- [x] Using `http4s` with `cats-effect`
 - [ ] Using `zio-http` with `zio`
 
   [todo-backend]: https://www.todobackend.com/
