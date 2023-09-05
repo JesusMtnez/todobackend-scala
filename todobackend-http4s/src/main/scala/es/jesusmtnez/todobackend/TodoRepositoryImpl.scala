@@ -12,12 +12,17 @@ object TodoRepositoryImpl {
       private val store: Ref[F, Map[UUID, TodoItem]]
   ) extends TodoRepository[F] {
 
-    override def create(title: String): F[Option[TodoItem]] =
+    override def create(
+        title: String,
+        order: Option[Int]
+    ): F[Option[TodoItem]] =
       for {
         id <- UUIDGen.randomUUID
         result <- store
           .updateAndGet { state =>
-            state ++ Map(id -> TodoItem.uncompleted(id, title))
+            state ++ Map(
+              id -> TodoItem.uncompleted(id, title, order.getOrElse(0))
+            )
           }
           .map(_.get(id))
       } yield result
@@ -47,8 +52,12 @@ object TodoRepositoryImpl {
             .map { todo =>
               val newTitle = title.getOrElse(todo.title)
               val newCompleted = completed.getOrElse(todo.completed)
-              // val newOrder = order.getOrElse(0)
-              todo.copy(title = newTitle, completed = newCompleted)
+              val newOrder = order.getOrElse(todo.order)
+              todo.copy(
+                title = newTitle,
+                completed = newCompleted,
+                order = newOrder
+              )
             }
             .fold(items)(item => items.removed(id) + (id -> item))
         }

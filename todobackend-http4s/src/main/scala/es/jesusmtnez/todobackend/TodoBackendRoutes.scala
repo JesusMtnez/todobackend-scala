@@ -39,7 +39,7 @@ object TodoBackendRoutes:
       case req @ POST -> Root =>
         for {
           item <- req.as[TodoRequest]
-          createdItem <- repository.create(item.title)
+          createdItem <- repository.create(item.title, item.order)
           response <- Ok(createdItem)
         } yield response
 

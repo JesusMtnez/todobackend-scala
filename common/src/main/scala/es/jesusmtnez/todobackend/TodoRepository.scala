@@ -5,7 +5,7 @@ import es.jesusmtnez.todobackend.domain.TodoItem
 import java.util.UUID
 
 trait TodoRepository[F[_]] {
-  def create(title: String): F[Option[TodoItem]]
+  def create(title: String, order: Option[Int]): F[Option[TodoItem]]
   def delete(id: UUID): F[Unit]
   def deleteAll(): F[Unit]
   def getAll(): F[List[TodoItem]]
