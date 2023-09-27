@@ -18,7 +18,7 @@ lazy val common = project
   )
 
 val http4sV = "1.0.0-M40"
-val logbackV = "1.2.6"
+val logbackV = "1.4.11"
 val munitV = "0.7.29"
 val munitCE3V = "2.0.0-M3"
 
