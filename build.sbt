@@ -39,7 +39,7 @@ lazy val `todobackend-http4s` = project
   .dependsOn(common)
   .enablePlugins(BuildInfoPlugin)
 
-val zioHttpV = "3.0.0-RC2"
+val zioHttpV = "3.0.0-RC3"
 
 lazy val `todobackend-zio-http` = project
   .in(file("todobackend-zio-http"))
