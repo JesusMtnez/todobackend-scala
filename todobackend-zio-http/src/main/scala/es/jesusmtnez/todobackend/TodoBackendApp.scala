@@ -9,5 +9,5 @@ object TodoBackendApp extends ZIOAppDefault:
 
   override val run =
     Server
-      .serve(routes @@ RequestHandlerMiddlewares.debug)
+      .serve(routes.toHttpApp @@ Middleware.debug)
       .provide(Server.default)

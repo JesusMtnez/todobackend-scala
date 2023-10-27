@@ -5,7 +5,8 @@ import zio._
 import zio.http._
 
 object TodoBackendRoutes:
-  val about: HttpApp[Any, Nothing] = Http.collect[Request]:
-    case Method.GET -> Root / "about" => Response.text(BuildInfo.toString)
+  val about: Routes[Any, Nothing] = Routes(
+    Method.GET / "about" -> Handler.from(Response.text(BuildInfo.toString))
+  )
 
-  val todo: HttpApp[Any, Nothing] = Http.empty
+  val todo: Routes[Any, Nothing] = Routes.empty
