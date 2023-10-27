@@ -4,6 +4,8 @@ import buildinfo.BuildInfo
 import cats.effect.*
 import cats.syntax.all.*
 import es.jesusmtnez.todobackend.domain.*
+import io.circe.*
+import io.circe.generic.semiauto.*
 import org.http4s.HttpRoutes
 import org.http4s.circe.*
 import org.http4s.dsl.Http4sDsl
@@ -20,6 +22,10 @@ object TodoBackendRoutes:
   def todo[F[_]: Concurrent](repository: TodoRepository[F]): HttpRoutes[F] =
     val dsl = new Http4sDsl[F] {}
     import dsl._
+
+    implicit val todoItemCodec: Codec[TodoItem] = deriveCodec
+    implicit val todoRequestDecoder: Decoder[TodoRequest] = deriveDecoder
+    implicit val todoUpdateDecoder: Decoder[TodoUpdate] = deriveDecoder
 
     import org.http4s.circe.CirceEntityCodec.*
 

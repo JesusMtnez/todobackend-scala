@@ -10,12 +10,7 @@ val circeV = "0.14.6"
 
 lazy val common = project
   .in(file("common"))
-  .settings(
-    name := "todobackend-common",
-    libraryDependencies ++= Seq(
-      "io.circe" %% "circe-generic" % circeV
-    )
-  )
+  .settings(name := "todobackend-common")
 
 val http4sV = "1.0.0-M40"
 val logbackV = "1.4.11"
@@ -31,6 +26,7 @@ lazy val `todobackend-http4s` = project
       "org.http4s" %% "http4s-ember-server" % http4sV,
       "org.http4s" %% "http4s-dsl" % http4sV,
       "org.http4s" %% "http4s-circe" % http4sV,
+      "io.circe" %% "circe-generic" % circeV,
       "ch.qos.logback" % "logback-classic" % logbackV,
       "org.scalameta" %% "munit" % munitV % Test,
       "org.typelevel" %% "munit-cats-effect" % munitCE3V % Test

@@ -1,8 +1,5 @@
 package es.jesusmtnez.todobackend.domain
 
-import io.circe.*
-import io.circe.generic.semiauto.*
-
 import java.util.UUID
 
 final case class TodoItem(
@@ -13,8 +10,6 @@ final case class TodoItem(
 )
 
 object TodoItem:
-  given Codec[TodoItem] = deriveCodec
-
   private val baseUrl: String = "http://localhost:8080"
 
   def uncompleted(id: UUID, title: String, order: Int): TodoItem =
