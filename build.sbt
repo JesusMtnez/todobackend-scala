@@ -13,7 +13,7 @@ lazy val common = project
   .settings(name := "todobackend-common")
 
 val http4sV = "1.0.0-M40"
-val logbackV = "1.4.11"
+val logbackV = "1.4.12"
 val munitV = "0.7.29"
 val munitCE3V = "2.0.0-M4"
 
