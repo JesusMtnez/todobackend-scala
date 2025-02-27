@@ -30,8 +30,8 @@
           inherit system;
           overlays = [
             (final: prev: {
-              jdk = prev.jdk17_headless;
-              jre = prev.jdk17_headless;
+              jdk = prev.jdk21_headless;
+              jre = prev.jdk21_headless;
             })
           ];
         };
@@ -44,6 +44,7 @@
           ];
 
           packages = [
+            pkgs.gnused
             pkgs.jdk
             pkgs.nixpkgs-fmt
           ];
