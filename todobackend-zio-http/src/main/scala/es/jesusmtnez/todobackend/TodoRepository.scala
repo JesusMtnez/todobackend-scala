@@ -18,6 +18,29 @@ trait TodoRepository:
       order: Option[Int]
   ): Task[Option[TodoItem]]
 
+object TodoRepository {
+  def create(
+      title: String,
+      order: Option[Int]
+  ): ZIO[TodoRepository, Throwable, Option[TodoItem]] =
+    ZIO.serviceWithZIO[TodoRepository](_.create(title, order))
+  def delete(id: UUID): ZIO[TodoRepository, Throwable, Unit] =
+    ZIO.serviceWithZIO[TodoRepository](_.delete(id))
+  def deleteAll(): ZIO[TodoRepository, Throwable, Unit] =
+    ZIO.serviceWithZIO[TodoRepository](_.deleteAll())
+  def getAll(): ZIO[TodoRepository, Throwable, List[TodoItem]] =
+    ZIO.serviceWithZIO[TodoRepository](_.getAll())
+  def getById(id: UUID): ZIO[TodoRepository, Throwable, Option[TodoItem]] =
+    ZIO.serviceWithZIO[TodoRepository](_.getById(id))
+  def update(
+      id: UUID,
+      title: Option[String],
+      completed: Option[Boolean],
+      order: Option[Int]
+  ): ZIO[TodoRepository, Throwable, Option[TodoItem]] =
+    ZIO.serviceWithZIO[TodoRepository](_.update(id, title, completed, order))
+}
+
 final case class InMemoryRepository(
     private val store: Ref[Map[UUID, TodoItem]]
 ) extends TodoRepository:
