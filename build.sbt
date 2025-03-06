@@ -36,14 +36,23 @@ lazy val `todobackend-http4s` = project
   .dependsOn(common)
   .enablePlugins(BuildInfoPlugin)
 
-val zioHttpV = "3.0.1"
-
 lazy val `todobackend-zio-http` = project
   .in(file("todobackend-zio-http"))
   .settings(
     name := "todobackend-zio-http",
     libraryDependencies ++= Seq(
-      "dev.zio" %% "zio-http" % zioHttpV
+      "dev.zio" %% "zio-http" % "3.0.1"
+    )
+  )
+  .dependsOn(common)
+  .enablePlugins(BuildInfoPlugin)
+
+lazy val `todobackend-cask` = project
+  .in(file("todobackend-cask"))
+  .settings(
+    name := "todobackend-cask",
+    libraryDependencies ++= Seq(
+      "com.lihaoyi" %% "cask" % "0.9.7"
     )
   )
   .dependsOn(common)
@@ -55,7 +64,8 @@ lazy val root = project
   .aggregate(
     common,
     `todobackend-http4s`,
-    `todobackend-zio-http`
+    `todobackend-zio-http`,
+    `todobackend-cask`
   )
 
 addCommandAlias("fmt", "all scalafmtSbt scalafmt Test/scalafmt")
