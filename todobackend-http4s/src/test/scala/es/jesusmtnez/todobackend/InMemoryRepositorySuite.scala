@@ -2,7 +2,6 @@ package es.jesusmtnez.todobackend
 
 import cats.effect.IO
 import munit.CatsEffectSuite
-import es.jesusmtnez.todobackend.domain.TodoItem
 
 class InMemoryRepositorySuite extends CatsEffectSuite {
 
