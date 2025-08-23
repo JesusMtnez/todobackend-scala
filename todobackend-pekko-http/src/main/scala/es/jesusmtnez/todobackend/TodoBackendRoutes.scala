@@ -8,7 +8,6 @@ import org.apache.pekko.http.scaladsl.model.*
 import org.apache.pekko.http.scaladsl.server.Route
 import es.jesusmtnez.todobackend.domain.*
 import com.github.pjfanning.pekkohttpcirce.FailFastCirceSupport.*
-import org.apache.pekko.http.scaladsl.marshalling.Marshalling.*
 
 object TodoBackendRoutes {
 
