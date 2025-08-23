@@ -7,8 +7,4 @@ A series of implemetations of [Todo-Backend][todo-backend] REST API in **Scala**
 - [x] Using `pekko-http`: see `todobackend-pekko-http` module
 - [x] Using `zio-http` with `zio`: see `todobackend-zio-http` module
 
-### Future implementations
-
-- [ ] Using `play`: see `todobackend-play` module
-
   [todo-backend]: https://www.todobackend.com/
