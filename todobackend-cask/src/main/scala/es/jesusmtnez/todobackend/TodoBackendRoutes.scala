@@ -37,7 +37,8 @@ object TodoBackendRoutes {
     def rootCors() = corsResponse
 
     @cask.options("/:id")
-    @annotation.nowarn def pathCors(id: String) = corsResponse
+    @annotation.nowarn
+    def pathCors(id: String) = corsResponse
 
     @cask.get("/")
     def getAll() = {
