@@ -1,4 +1,4 @@
-val scalaV = "3.6.3"
+val scalaV = "3.7.2"
 
 ThisBuild / organization := "es.jesusmtnez"
 ThisBuild / organizationName := "JesusMtnez"
